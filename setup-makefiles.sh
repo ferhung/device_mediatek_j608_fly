@@ -73,7 +73,6 @@ LINEEND=""
 echo " $OUTDIR/proprietary/$FILE:system/$FILE$LINEEND" >> $MAKEFILE
 done
 
-
 # hackywhacky
 echo "PRODUCT_COPY_FILES += \\" >> $MAKEFILE
 #echo " $OUTDIR/proprietary/lib/hw/audio_policy.mt6592.so:system/lib/hw/audio_policy.mt6592.so \\" >> $MAKEFILE
