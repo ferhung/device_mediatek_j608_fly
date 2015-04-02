@@ -8,6 +8,6 @@ TARGET_SCREEN_WIDTH := 720
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := j608_fly
 PRODUCT_NAME := cm_j608_fly
-PRODUCT_BRAND := mediatek
-PRODUCT_MODEL := j608_fly
+PRODUCT_BRAND := Fly
+PRODUCT_MODEL := IQ4511
 PRODUCT_MANUFACTURER := mediatek

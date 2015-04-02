@@ -68,7 +68,6 @@ TARGET_USERIMAGES_USE_EXT4 := true
 DEVICE_RESOLUTION := 720x1280
 TARGET_RECOVERY_FSTAB := $(DEVICE_FOLDER)/recovery/recovery.fstab
 TARGET_PREBUILT_RECOVERY_KERNEL := $(DEVICE_FOLDER)/recovery/kernel
-TW_NO_USB_STORAGE: = True
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 TW_EXTERNAL_STORAGE_PATH := "/sdcard"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
@@ -77,12 +76,12 @@ TW_INTERNAL_STORAGE_MOUNT_POINT := "internal_sd"
 TW_DEFAULT_EXTERNAL_STORAGE := true
 TW_INCLUDE_JB_CRYPTO := true
 TW_CRYPTO_FS_TYPE := "ext4"
-TW_CRYPTO_REAL_BLKDEV := "/dev/block/platform/mtk-msdc.0/by-name/userdata"
+TW_CRYPTO_REAL_BLKDEV := "/dev/block/mmcblk0p7"
 TW_CRYPTO_MNT_POINT := "/data"
 TW_CRYPTO_FS_OPTIONS := "nosuid,nodev,noatime,discard,noauto_da_alloc,data=ordered"
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 TW_MAX_BRIGHTNESS := 255
-TW_NO_USB_STORAGE := true
+TW_CUSTOM_CPU_TEMP_PATH := /proc/mtktscpu/mtktscpu_read_temperature
 
 # wifi
 WPA_SUPPLICANT_VERSION := VER_0_8_X
