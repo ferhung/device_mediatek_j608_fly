@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-$(call inherit-product, device/mediatek/j608_fly/device_j608_fly.mk)
+$(call inherit-product, device/fly/j608_fly/device_j608_fly.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # Configure as xhdpi device to prevent breaking without mdpi drawables
@@ -22,7 +22,7 @@ PRODUCT_AAPT_CONFIG := normal mdpi hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
 PRODUCT_NAME := full_j608_fly
-PRODUCT_DEVICE := j608_fly
-PRODUCT_BRAND := mediatek
-PRODUCT_MODEL := j608_fly
-PRODUCT_MANUFACTURER := mediatek
+PRODUCT_DEVICE := IQ4511
+PRODUCT_BRAND := FLY
+PRODUCT_MODEL := IQ4511
+PRODUCT_MANUFACTURER := FLY

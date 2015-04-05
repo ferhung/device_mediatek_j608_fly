@@ -14,12 +14,12 @@
 # limitations under the License.
 #
 
-$(call inherit-product-if-exists, vendor/mediatek/j608_fly/j608_fly-vendor.mk)
+$(call inherit-product-if-exists, vendor/fly/j608_fly/j608_fly-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay/
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/root/fstab.mt6592:root/fstab.mt6592
+# PRODUCT_COPY_FILES += \
+#     $(LOCAL_PATH)/root/fstab.mt6592:root/fstab.mt6592
 
 
 PRODUCT_COPY_FILES += \

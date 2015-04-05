@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VENDOR=mediatek
+VENDOR=fly
 DEVICE=j608_fly
 OUTDIR=vendor/$VENDOR/$DEVICE
 MAKEFILE=../../../$OUTDIR/$DEVICE-vendor-blobs.mk

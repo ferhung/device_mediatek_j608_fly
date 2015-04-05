@@ -1,4 +1,10 @@
-$(call inherit-product, device/mediatek/j608_fly/full_j608_fly.mk)
+$(call inherit-product, device/fly/j608_fly/full_j608_fly.mk)
+$(call inherit-product, vendor/cm/config/gsm.mk)
+
+# Release name
+PRODUCT_RELEASE_NAME := j608_fly
+
+# Inherit some common CM stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
 # Boot animation
@@ -10,4 +16,4 @@ PRODUCT_DEVICE := j608_fly
 PRODUCT_NAME := cm_j608_fly
 PRODUCT_BRAND := Fly
 PRODUCT_MODEL := IQ4511
-PRODUCT_MANUFACTURER := mediatek
+PRODUCT_MANUFACTURER := fly

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VENDOR=mediatek
+VENDOR=fly
 DEVICE=j608_fly
 
 BASE=../../../vendor/$VENDOR/$DEVICE/proprietary
