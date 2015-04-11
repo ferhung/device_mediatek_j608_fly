@@ -12,20 +12,18 @@ COMMON_GLOBAL_CFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
 # board
 TARGET_BOARD_PLATFORM := mt6592
 TARGET_NO_BOOTLOADER := true
-
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_ARCH_VARIANT_CPU := cortex-a7
+ARCH_ARM_HAVE_VFP := true
+ARCH_ARM_HAVE_NEON := true
+ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
 TARGET_CPU_VARIANT := cortex-a7
-
 TARGET_BOOTLOADER_BOARD_NAME := mt6592
-
-TARGET_USERIMAGES_USE_EXT4:=true
-TARGET_USERIMAGES_SPARSE_EXT_DISABLED := false
-
+BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_KERNEL_CMDLINE :=
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
@@ -47,16 +45,14 @@ BOARD_SEPOLICY_UNION := \
        file_contexts
 
 TARGET_PREBUILT_KERNEL := device/fly/j608_fly/kernel
-TARGET_RECOVERY_FSTAB := device/fly/j608_fly/recovery.fstab
-
-BOARD_HAS_NO_SELECT_BUTTON := true
+TARGET_RECOVERY_FSTAB := device/fly/j608_fly/rootdir/root/recovery.fstab
 
 BOARD_CUSTOM_BOOTIMG_MK := device/fly/j608_fly/bootimg.mk
 BOARD_MKBOOTIMG_ARGS := --board 1419997733
 
 TARGET_KMODULES := true
 
-BOARD_EGL_CFG := device/fly/j608_fly/egl.cfg
+BOARD_EGL_CFG := device/fly/j608_fly/rootdir/configs/egl.cfg
 
 BOARD_RIL_CLASS := ../../../device/fly/j608_fly/ril/
 

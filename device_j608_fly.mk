@@ -15,6 +15,8 @@ else
 endif
 
 PRODUCT_COPY_FILES += \
+	device/fly/j608_fly/rootdir/configs/android.hardware.microphone.xml:system/etc/permissions/android.hardware.microphone.xml \
+	device/fly/j608_fly/rootdir/configs/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml \
 	frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
 	frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
@@ -77,14 +79,20 @@ PRODUCT_COPY_FILES += \
     device/fly/j608_fly/mtk-kpd.kl:system/usr/keylayout/mtk-kpd.kl
 
 PRODUCT_COPY_FILES += \
-    device/fly/j608_fly/init.recovery.mt6592.rc:root/init.recovery.mt6592.rc
-
-PRODUCT_COPY_FILES += \
     device/fly/j608_fly/audio/audio_policy.conf:system/etc/audio_policy.conf
 
 PRODUCT_COPY_FILES += \
-    device/fly/j608_fly/fstab.mt6592:root/fstab.mt6592 \
-    device/fly/j608_fly/init.mt6592.rc:root/init.mt6592.rc \
+    device/fly/j608_fly/rootdir/root/fstab.mt6592:root/fstab.mt6592 \
+    device/fly/j608_fly/rootdir/root/init.mt6592.usb.rc:root/init.mt6592.usb.rc \
+    device/fly/j608_fly/rootdir/root/init.rc:root/init.rc \
+    device/fly/j608_fly/rootdir/root/init.mt6592.rc:root/init.mt6592.rc \
+    device/fly/j608_fly/rootdir/root/init.project.rc:root/init.project.rc \
+    device/fly/j608_fly/rootdir/root/init.usb.rc:root/init.usb.rc \
+    device/fly/j608_fly/rootdir/root/factory_init.rc:root/factory_init.rc \
+    device/fly/j608_fly/rootdir/root/init.fuse.rc:root/init.fuse.rc \
+    device/fly/j608_fly/rootdir/root/init.modem.rc:root/init.modem.rc \
+    device/fly/j608_fly/rootdir/root/init.xlog.rc:root/init.xlog.rc \
+    device/fly/j608_fly/rootdir/root/ueventd.mt6592.rc:root/ueventd.mt6592.rc \
     $(LOCAL_KERNEL):kernel
 
 $(call inherit-product, build/target/product/full.mk)
