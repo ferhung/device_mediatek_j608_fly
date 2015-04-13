@@ -72,9 +72,8 @@ PRODUCT_PROPERTY_OVERRIDES := \
 	ro.mediatek.chip_ver=S01 \
 	ro.mediatek.version.release=ALPS.KK1.MP3DS.V1.40 \
 	ro.mediatek.platform=MT6592 \
-	ro.mediatek.version.sdk=2
-
-
+	ro.mediatek.version.sdk=2\
+	
 PRODUCT_COPY_FILES += \
     device/fly/j608_fly/mtk-kpd.kl:system/usr/keylayout/mtk-kpd.kl
 
@@ -83,7 +82,6 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     device/fly/j608_fly/rootdir/root/fstab.mt6592:root/fstab.mt6592 \
-    device/fly/j608_fly/rootdir/root/init.mt6592.usb.rc:root/init.mt6592.usb.rc \
     device/fly/j608_fly/rootdir/root/init.rc:root/init.rc \
     device/fly/j608_fly/rootdir/root/init.mt6592.rc:root/init.mt6592.rc \
     device/fly/j608_fly/rootdir/root/init.project.rc:root/init.project.rc \

@@ -17,7 +17,6 @@ TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_ARCH_VARIANT_CPU := cortex-a7
 ARCH_ARM_HAVE_VFP := true
 ARCH_ARM_HAVE_NEON := true
-ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
@@ -45,7 +44,23 @@ BOARD_SEPOLICY_UNION := \
        file_contexts
 
 TARGET_PREBUILT_KERNEL := device/fly/j608_fly/kernel
+
+# recovery TWRP
+DEVICE_RESOLUTION := 720x1280
 TARGET_RECOVERY_FSTAB := device/fly/j608_fly/rootdir/root/recovery.fstab
+TARGET_PREBUILT_RECOVERY_KERNEL := device/fly/j608_fly/kernel
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/mt_usb/musb-hdrc.0/gadget/lun%d/file
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
+TW_INCLUDE_JB_CRYPTO := true
+TW_CRYPTO_FS_TYPE := "ext4"
+TW_CRYPTO_REAL_BLKDEV := "/dev/block/mmcblk0p7"
+TW_CRYPTO_MNT_POINT := "/data"
+TW_CRYPTO_FS_OPTIONS := "nosuid,nodev,noatime,discard,noauto_da_alloc,data=ordered"
+TW_DEFAULT_EXTERNAL_STORAGE := true
+TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
+TW_MAX_BRIGHTNESS := 255
+TW_CUSTOM_CPU_TEMP_PATH := /sys/devices/virtual/thermal/thermal_zone1/temp
+
 
 BOARD_CUSTOM_BOOTIMG_MK := device/fly/j608_fly/bootimg.mk
 BOARD_MKBOOTIMG_ARGS := --board 1419997733
@@ -53,7 +68,7 @@ BOARD_MKBOOTIMG_ARGS := --board 1419997733
 TARGET_KMODULES := true
 
 BOARD_EGL_CFG := device/fly/j608_fly/rootdir/configs/egl.cfg
-
+# BOARD_EGL_WORKAROUND_BUG_10194508 := true
 BOARD_RIL_CLASS := ../../../device/fly/j608_fly/ril/
 
 BOARD_CONNECTIVITY_VENDOR := MediaTek
