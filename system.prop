@@ -1,6 +1,3 @@
-#
-# system.prop for j608
-#
 service.adb.root=1
 ro.sf.lcd_density=320
 wifi.interface=wlan0
@@ -22,7 +19,7 @@ ril.external.md=0
 ril.current.share_modem=2
 ril.first.md=1
 ril.flightmode.poweroffMD=1
-ril.telephony.mode=1
+ril.telephony.mode=0
 ril.radiooff.poweroffMD=0
 ril.active.md=0
 

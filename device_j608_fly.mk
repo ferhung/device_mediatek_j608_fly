@@ -26,7 +26,19 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
 	frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
 	frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
-	frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml
+	frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml\
+	frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml\
+	frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml\
+	frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml\
+	frameworks/native/data/etc/android.hardware.faketouch.xml:system/etc/permissions/android.hardware.faketouch.xml\
+	frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml\
+	frameworks/native/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml\
+	frameworks/native/data/etc/android.hardware.touchscreen.multitouch.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.xml\
+	frameworks/native/data/etc/android.hardware.touchscreen.xml:system/etc/permissions/android.hardware.touchscreen.xml\
+	frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml\
+	frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml\
+	frameworks/native/data/etc/com.nxp.mifare.xml:system/etc/permissions/com.nxp.mifare.xml
+
 
 PRODUCT_PACKAGES += \
     libxlog
@@ -50,9 +62,13 @@ PRODUCT_PACKAGES += \
     lib_driver_cmd_mt66xx
 
 PRODUCT_PACKAGES += \
+    libbt-vendor
+
+PRODUCT_PACKAGES += \
 	Torch
 
 PRODUCT_PROPERTY_OVERRIDES := \
+	persist.sys.timezone=Europe/Minsk\
 	service.adb.root=1 \
 	ro.mediatek.wlan.wsc=1 \
 	ro.mediatek.wlan.p2p=1 \
@@ -72,7 +88,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
 	ro.mediatek.chip_ver=S01 \
 	ro.mediatek.version.release=ALPS.KK1.MP3DS.V1.40 \
 	ro.mediatek.platform=MT6592 \
-	ro.mediatek.version.sdk=2\
+	ro.mediatek.version.sdk=2
 	
 PRODUCT_COPY_FILES += \
     device/fly/j608_fly/mtk-kpd.kl:system/usr/keylayout/mtk-kpd.kl
@@ -81,13 +97,15 @@ PRODUCT_COPY_FILES += \
     device/fly/j608_fly/audio/audio_policy.conf:system/etc/audio_policy.conf
 
 PRODUCT_COPY_FILES += \
+	device/fly/j608_fly/rootdir/root/default.prop:root/default.prop \
     device/fly/j608_fly/rootdir/root/fstab.mt6592:root/fstab.mt6592 \
     device/fly/j608_fly/rootdir/root/init.rc:root/init.rc \
     device/fly/j608_fly/rootdir/root/init.mt6592.rc:root/init.mt6592.rc \
     device/fly/j608_fly/rootdir/root/init.project.rc:root/init.project.rc \
     device/fly/j608_fly/rootdir/root/init.usb.rc:root/init.usb.rc \
     device/fly/j608_fly/rootdir/root/factory_init.rc:root/factory_init.rc \
-    device/fly/j608_fly/rootdir/root/init.fuse.rc:root/init.fuse.rc \
+    device/fly/j608_fly/rootdir/root/init.protect.rc:root/init.protect.rc \
+	device/fly/j608_fly/rootdir/root/init.trace.rc:root/init.trace.rc \
     device/fly/j608_fly/rootdir/root/init.modem.rc:root/init.modem.rc \
     device/fly/j608_fly/rootdir/root/init.xlog.rc:root/init.xlog.rc \
     device/fly/j608_fly/rootdir/root/ueventd.mt6592.rc:root/ueventd.mt6592.rc \
