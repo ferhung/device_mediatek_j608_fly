@@ -97,8 +97,7 @@ PRODUCT_COPY_FILES += \
     device/fly/j608_fly/audio/audio_policy.conf:system/etc/audio_policy.conf
 
 PRODUCT_COPY_FILES += \
-	device/fly/j608_fly/rootdir/root/default.prop:root/default.prop \
-    device/fly/j608_fly/rootdir/root/fstab.mt6592:root/fstab.mt6592 \
+	device/fly/j608_fly/rootdir/root/fstab.mt6592:root/fstab.mt6592 \
     device/fly/j608_fly/rootdir/root/init.rc:root/init.rc \
     device/fly/j608_fly/rootdir/root/init.mt6592.rc:root/init.mt6592.rc \
     device/fly/j608_fly/rootdir/root/init.project.rc:root/init.project.rc \
