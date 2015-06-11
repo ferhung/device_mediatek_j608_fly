@@ -21,3 +21,5 @@ make otapackage -j8
 	# Build recoveries (TWRP)
 
 . build/tools/device/makerecoveries.sh cm_j608_fly-userdebug
+
+https://github.com/omnirom/android_bootable_recovery/tree/android-4.4
