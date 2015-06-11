@@ -1,3 +1,6 @@
+import init.mt6592.usb.rc
+#import init.modem.rc
+
 on init
     export LD_PRELOAD /system/lib/libxlog.so
     export EXTERNAL_STORAGE /storage/sdcard0
@@ -11,6 +14,10 @@ on init
 
     mkdir /mnt/media_rw/sdcard0 0700 media_rw media_rw
     mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
+
+    # USB OTG
+    mkdir /storage/usbotg 0700 root root
+    mkdir /mnt/media_rw/usbotg 0700 media_rw media_rw
 
     chown system graphics /dev/ion
     chmod 0644 /dev/ion
@@ -30,18 +37,6 @@ on init
 
     chown system system /dev/rtc0
     chmod 0660 /dev/rtc0
-
-    chown system system /dev/hwmsensor
-    chmod 0660 /dev/hwmsensor
-
-    chown system system /dev/msensor
-    chmod 0660 /dev/msensor
-
-    chown system system /dev/gsensor
-    chmod 0660 /dev/gsensor
-
-    chown radio system /dev/als_ps
-    chmod 0660 /dev/als_ps
 
     chown system media /dev/MJC
     chmod 0660 /dev/MJC
@@ -63,48 +58,62 @@ on init
     chown system /dev/ttyGS1
     chmod 660 /dev/ttyGS1
 
-    # bluetooth
-    mkdir /data/@btmtk 0770 bluetooth net_bt
     chown bluetooth bluetooth /dev/hid-keyboard
     chmod 0660 /dev/hid-keyboard
-    #Use uinput's default permission
-    chown system net_bt_admin /dev/uinput
-
-    # UIBC
+    
     chown system media /dev/uibc
     chmod 0660 /dev/uibc
 
-    #TV-out
-    chmod 0664 /dev/TV-out
+    # GPS
+    chmod 0666 /dev/gps
+    chmod 0660 /dev/stpgps
+    mkdir /data/agps_supl 0771 gps system
+    chown gps gps /dev/stpgps
+    chown gps gps /sys/class/gpsdrv/gps/pwrctl
+    chown gps gps /sys/class/gpsdrv/gps/suspend
+    chown gps gps /sys/class/gpsdrv/gps/state
+    chown gps gps /sys/class/gpsdrv/gps/pwrsave
+    chown gps gps /sys/class/gpsdrv/gps/status
 
-    #HDMI
-    chown meida system /dev/hdmitx
-    chmod 0660 /dev/hdmitx
-
+    ## Thermal
+    #change permissions on thermal devices
+    chown root system /proc/mtktscpu/mtktscpu
+    chmod 0660 /proc/mtktscpu/mtktscpu
+    chown root system /proc/mtktsabb/mtktsabb
+    chmod 0660 /proc/mtktsabb/mtktsabb
+    chown root system /proc/mtktsbattery/mtktsbattery
+    chmod 0660 /proc/mtktsbattery/mtktsbattery
+    chown root system /proc/mtktspa/mtktspa
+    chmod 0660 /proc/mtktspa/mtktspa
+    chown root system /proc/mtktspmic/mtktspmic
+    chmod 0660 /proc/mtktspmic/mtktspmic
+    chown root system /proc/driver/mtk_thermal_monitor
+    chmod 0660 /proc/driver/mtk_thermal_monitor
+    chown root radio /proc/driver/mtm_scen_call
+    chmod 0660 /proc/driver/mtm_scen_call
+    chown system system /proc/driver/mtk_cl_sd_pid
+    chmod 0660 /proc/driver/mtk_cl_sd_pid
+    chown root system /proc/wmt_tm/wmt_tm
+    chown system system /proc/wmt_tm/tm_pid
+    chown system system /proc/wmt_tm/tx_thro
+    chown system system /proc/wmt_tm/wmt_val
+    chown system system /proc/wmt_tm/wfd_stat
+    
     # JPEG
-    chmod 0440 /dev/mtk_jpeg
+    chmod 0444 /dev/mtk_jpeg
     chown system camera /dev/mtk_jpeg
-    chmod 0440 /dev/mtk_jpeg
-    chmod 0440 /dev/mtk_almk
 
-    # DISP
-    chmod 0440 /dev/mtk_disp
-    chown system system /dev/mtk_disp
-
-
-    #Camera
+    # Camera
     chmod 0660 /dev/camera-sysram
-    chmod 0660 /dev/camera-isp
+    chmod 0664 /dev/camera-isp
     chmod 0660 /dev/camera-pipemgr
     chmod 0660 /dev/kd_camera_hw
     chmod 0660 /dev/kd_camera_flashlight
     chmod 0660 /dev/kd_camera_hw_bus2
     chmod 0660 /dev/FM50AF
+    chmod 0660 /dev/DW9714AF
     chmod 0660 /dev/DW9718AF
     chmod 0660 /dev/OV8825AF
-    chmod 0660 /dev/AD5823AF
-    chmod 0660 /dev/DW9714AF
-    chmod 0660 /dev/BU6424AF
     chmod 0660 /dev/CAM_CAL_DRV
 
     chown system camera /dev/camera-sysram
@@ -114,37 +123,17 @@ on init
     chown system camera /dev/kd_camera_flashlight
     chown system camera /dev/kd_camera_hw_bus2
     chown system camera /dev/FM50AF
+    chown system camera /dev/DW9714AF
     chown system camera /dev/DW9718AF
     chown system camera /dev/OV8825AF
-    chown system camera /dev/AD5823AF
-    chown system camera /dev/DW9714AF
-    chown system camera /dev/BU6424AF
     chown system camera /dev/CAM_CAL_DRV
 
-
-    #/dev/RT_Monitor
-    chmod 0600 /dev/RT_Monitor
     chown system system /dev/RT_Monitor
+    chmod 0600 /dev/RT_Monitor
 
-
-    #MATV
-    chmod 0660 /dev/MATV
-    chown system media /dev/MATV
-
-    # otg_test
     chown root radio /dev/mt_otg_test
     chmod 0660 /dev/mt_otg_test
 
-    # MDP
-    chmod 0660 /dev/mt-mdp
-    chown system media /dev/mt-mdp
-
-    # G2D
-    chmod 0660 /dev/mtkg2d
-    chown system media /dev/mtkg2d
-
-    # SMI
-    chmod 0660 /dev/MTK_SMI
     chown system media /dev/MTK_SMI
     chmod 0660 /dev/MTK_SMI
     chown system media /dev/mtk_sched
@@ -152,12 +141,60 @@ on init
     chown system media /dev/ebc
     chmod 0660 /dev/ebc
 
-    chmod 0660 /sys/devices/platform/msensor/driver/cpsopmode
-    chmod 0660 /sys/devices/platform/msensor/driver/cpsreptxy
-    chmod 0660 /sys/devices/platform/msensor/driver/cpsreptz
+    # Sensor
+    chmod 0666 /dev/hwmsensor
+    chmod 0666 /dev/msensor
+    chmod 0666 /dev/gsensor
+    chmod 0666 /dev/als_ps
+    chmod 0666 /dev/gyroscope
+    chmod 0660 /sys/class/misc/m_acc_misc/accenablenodata
+    chmod 0660 /sys/class/misc/m_acc_misc/accactive
+    chmod 0660 /sys/class/misc/m_acc_misc/accdelay
+    chmod 0660 /sys/class/misc/m_mag_misc/magactive
+    chmod 0660 /sys/class/misc/m_mag_misc/magdelay
+    chmod 0660 /sys/class/misc/m_mag_misc/magoactive
+    chmod 0660 /sys/class/misc/m_mag_misc/magodelay
+    chmod 0666 /sys/devices/platform/msensor/driver/cpsopmode
+    chmod 0666 /sys/devices/platform/msensor/driver/cpsreptxy
+    chmod 0666 /sys/devices/platform/msensor/driver/cpsreptz
     chmod 0660 /sys/devices/platform/gsensor/driver/cpsopmode
     chmod 0660 /sys/devices/platform/gsensor/driver/cpsrange
     chmod 0660 /sys/devices/platform/gsensor/driver/cpsbandwidth
+    chown system system /dev/hwmsensor
+    chown system system /dev/msensor
+    chown system system /dev/gsensor
+    chown radio system /dev/als_ps
+    chown system system /dev/gyroscope
+    chown system /sys/class/misc/m_acc_misc/accenablenodata
+    chown system /sys/class/misc/m_acc_misc/accactive
+    chown system /sys/class/misc/m_acc_misc/accdelay
+    chown system /sys/class/misc/m_mag_misc/magactive
+    chown system /sys/class/misc/m_mag_misc/magdelay
+    chown system /sys/class/misc/m_mag_misc/magoactive
+    chown system /sys/class/misc/m_mag_misc/magodelay
+
+    mkdir /data/amit/ 0770 system system
+    mkdir /data/misc/sensor 0774 system system
+    mkdir /data/misc/akmd 0770 system system
+    mkdir /data/misc/s62x 0771 compass compass
+    mkdir /data/acdapi/ 0770 system system
+    chmod 0666 /data/misc/acdapi/calib.dat
+    chmod 0666 /data/misc/acdapi/param.dat
+    chmod 0666 /data/misc/acdapi/sensors.dat
+    chown system /sys/class/input/input5/enable
+    chown system /sys/class/input/input5/delay
+    chown system /sys/class/input/input5/wake
+    chown system /sys/class/input/input3/enable
+    chown system /sys/class/input/input3/wake
+    chown system /sys/class/input/input4/offsets    
+    chown system /sys/devices/platform/msensor/driver/cpsopmode
+    chown system /sys/devices/platform/msensor/driver/cpsreptxy
+    chown system /sys/devices/platform/msensor/driver/cpsreptz
+    chown system /sys/devices/platform/gsensor/driver/cpsopmode
+    chown system /sys/devices/platform/gsensor/driver/cpsrange
+    chown system /sys/devices/platform/gsensor/driver/cpsbandwidth
+    mkdir	/data/data/mcube 0664 system system
+
     chmod 0664 /sys/devices/platform/mt-pmic/pmic_access_bank0
     chmod 0664 /sys/devices/platform/mt-pmic/pmic_access_bank1
     chmod 0664 /sys/devices/platform/mt6333-user/mt6333_access
@@ -171,112 +208,42 @@ on init
     chmod 0660 /sys/power/wake_lock
     chmod 0660 /sys/power/wake_unlock
     chmod 0664 /sys/class/leds/lcd-backlight/brightness
-    chmod 0660 /proc/smb/ScreenComm
-
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_rate
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/timer_rate
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/timer_slack
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/timer_slack   
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/target_loads
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/target_loads
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/boost
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/boost
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/boostpulse
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/input_boost
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/input_boost
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/boostpulse_duration
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/boostpulse_duration
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
     chmod 0660 /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
-
-    chown system system /sys/devices/system/cpu/cpufreq/hotplug/cpu_num_base
     chmod 0660 /sys/devices/system/cpu/cpufreq/hotplug/cpu_num_base
-    chown system system /proc/cpufreq/cpufreq_limited_by_hevc
-    chmod 0660 /proc/cpufreq/cpufreq_limited_by_hevc
-    chown system system /proc/cpufreq/cpufreq_ptpod_temperature_limit
-    chmod 0660 /proc/cpufreq/cpufreq_ptpod_temperature_limit
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
     chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-	
-    chown system system /sys/devices/system/cpu/cpufreq/hotplug/is_cpu_hotplug_disable
-    chmod 0660 /sys/devices/system/cpu/cpufreq/hotplug/is_cpu_hotplug_disable
-    chown system system /sys/devices/system/cpu/cpu1/online
-    chmod 0660 /sys/devices/system/cpu/cpu1/online
-    chown system system /sys/devices/system/cpu/cpu2/online
-    chmod 0660 /sys/devices/system/cpu/cpu2/online
-    chown system system /sys/devices/system/cpu/cpu3/online
-    chmod 0660 /sys/devices/system/cpu/cpu3/online
-    chown system system /sys/devices/system/cpu/cpu4/online
-    chmod 0660 /sys/devices/system/cpu/cpu4/online
-    chown system system /sys/devices/system/cpu/cpu5/online
-    chmod 0660 /sys/devices/system/cpu/cpu5/online
-    chown system system /sys/devices/system/cpu/cpu6/online
-    chmod 0660 /sys/devices/system/cpu/cpu6/online
-    chown system system /sys/devices/system/cpu/cpu7/online
-    chmod 0660 /sys/devices/system/cpu/cpu7/online
-    
-    # Assume SMP uses shared cpufreq policy for all CPUs
-    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-
-	chmod 0664 /sys/class/syna/gesenable
     chmod 0664 /sys/class/leds/lcd-backlight/brightness
-	chown system system /sys/class/syna/gesenable
-    chown system system /sys/class/timed_output/vibrator/enable
-    chown system system /sys/class/leds/keyboard-backlight/brightness
-    chown system radio  /sys/class/leds/lcd-backlight/brightness
-    chown system system /sys/class/leds/button-backlight/brightness
-    chown system system /sys/class/leds/jogball-backlight/brightness
-    chown system system /sys/class/leds/red/brightness
-    chown system system /sys/class/leds/green/brightness
-    chown system system /sys/class/leds/blue/brightness
-    chown system system /sys/class/leds/red/device/grpfreq
-    chown system system /sys/class/leds/red/device/grppwm
-    chown system system /sys/class/leds/red/device/blink
-    chown system system /sys/class/timed_output/vibrator/enable
-    chown system system /sys/module/sco/parameters/disable_esco
-    chown system system /sys/kernel/ipv4/tcp_wmem_min
-    chown system system /sys/kernel/ipv4/tcp_wmem_def
-    chown system system /sys/kernel/ipv4/tcp_wmem_max
-    chown system system /sys/kernel/ipv4/tcp_rmem_min
-    chown system system /sys/kernel/ipv4/tcp_rmem_def
-    chown system system /sys/kernel/ipv4/tcp_rmem_max
-    chown root   system /sys/kernel/debug/binder/transaction_log_enable
-    chown root   system /sys/kernel/debug/binder/perf_evalue
-    chown root radio /proc/cmdline
-
-# Set these so we can remotely update SELinux policy
-    chown system system /sys/fs/selinux/load
-    chown system system /sys/fs/selinux/enforce
-
-    chown system /sys/module/mlog/parameters/do_mlog
-    chown system /sys/module/mlog/parameters/timer_intval
-    
-	chown root   radio  /sys/class/leds/lcd-backlight/duty
-	chown root   radio  /sys/class/leds/lcd-backlight/div
-	chown system system /sys/class/leds/lcd-backlight/trigger
-	chown system system /sys/class/leds/button-backlight/trigger
-	chown system system /sys/class/leds/keyboard-backlight/trigger
-	chown system system /sys/class/leds/jogball-backlight/trigger
-	chown system system /sys/class/leds/red/trigger
-	chown system system /sys/class/leds/green/trigger
-	chown system system /sys/class/leds/blue/trigger
-
-    # Permission for hibernation
-    chown radio system /sys/power/tuxonice
-    chown radio system /sys/power/tuxonice/do_hibernate
     chmod 0770 /sys/power/tuxonice
     chmod 0220 /sys/power/tuxonice/do_hibernate
 
 on post-fs-data
+    # Modem related device nodes
+    mkdir /data/nvram/md 0770 root nvram
+    mkdir /data/nvram/md2 0770 root nvram
+    chown ccci ccci /sys/kernel/ccci/boot
+    # xplod: this is not in the original mtk file... But I have no
+    # idea what kind of sorcery normally sets them
+    chown ccci ccci /dev/ccci_fs
+    chown ccci ccci /dev/ccci_ioctl0
+    chown ccci ccci /dev/ccci_ioctl1
+    chown ccci ccci /dev/ccci_ipc_1220_0
+    chown ccci ccci /dev/ccci_md_log_rx
+    chown ccci ccci /dev/ccci_md_log_tx
+    chown ccci ccci /dev/ccci_monitor
+    chown ccci ccci /dev/ccci_pcm_rx
+    chown ccci ccci /dev/ccci_pcm_tx
+    chown ccci ccci /dev/ccci_uem_rx
+    chown ccci ccci /dev/ccci_uem_tx
+
     # Create the directories used by the Wireless subsystem
     mkdir /data/misc/wifi 0770 wifi wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
@@ -294,6 +261,11 @@ on post-fs-data
     chown system net_bt_admin /dev/uinput
 
     mkdir /dev/radio 0770 radio radio
+
+    # NFC
+    chmod 0666 /dev/mt6605
+    chown system system /dev/mt6605
+    mkdir /data/nfc_socket 0771 nfc radio
 
     start adbd
 
@@ -427,6 +399,18 @@ service NvRAMAgent /system/bin/nvram_agent_binder
      user system
      group system nvram
 
+service thermal_manager /system/bin/thermal_manager
+    user root
+    oneshot
+
+service thermal /system/bin/thermal
+    user system
+    group system
+
+service thermald /system/bin/thermald
+    user system
+    group system
+
 #
 # Modem
 #
@@ -450,20 +434,70 @@ service muxreport-daemon /system/bin/muxreport
     disabled
     oneshot
 
+service ril-daemon /system/bin/rild
+    class core
+    socket rild stream 660 root radio
+    socket rild2 stream 660 root radio
+    socket rild-debug stream 660 radio system
+    socket rild-oem stream 660 radio system
+    socket rild-mtk-ut stream 660 radio net_bt
+    socket rild-mtk-ut-2 stream 660 radio net_bt
+    socket rild-mtk-modem stream 660 radio system
+    socket rild-atci stream 660 root radio
+    user root
+    group radio cache inet misc audio sdcard_r sdcard_rw log ccci system
+    disabled
+
+service ril-daemon-md2 /system/bin/rildmd2
+    class core
+    socket rild-md2 stream 660 root radio
+    socket rild2-md2 stream 660 root radio
+    socket rild-debug-md2 stream 660 radio system
+    socket rild-oem-md2 stream 660 radio system
+    socket rild-mtk-ut-md2 stream 660 radio net_bt
+    socket rild-mtk-ut-2-md2 stream 660 radio net_bt
+    socket rild-mtk-modem-md2 stream 660 radio system
+    socket rild-atci-md2 stream 660 root radio
+    user root
+    group radio cache inet misc audio sdcard_r sdcard_rw log ccci system
+    disabled
+
 service md_minilog_util /system/bin/md_minilog_util
     user radio
     disabled
     oneshot
 
-service ccci_fsd /system/bin/ccci_fsd 0
+#
+#  Modem related services (Begin)
+#
+
+service permission_check /system/bin/permission_check
+    class main
     user root
-    group  nvram ccci system
+    group nvram
+    oneshot
+
+service ccci_fsd /system/bin/ccci_fsd 0
+    user ccci
+    group nvram ccci system
     class core
     oneshot
 
-service ccci_mdinit /system/bin/ccci_mdinit 0
-    user root
-    group  nvram ccci system
+service ccci2_fsd /system/bin/ccci_fsd 1
+    user ccci
+    group nvram ccci system
+    class core
+    oneshot
+
+service ccci_mdinit /system/bin/logwrapper /system/xbin/strace -s 1024 /system/bin/ccci_mdinit 0
+    user system
+    group ccci system
+    class core
+    oneshot
+
+service ccci2_mdinit /system/bin/ccci_mdinit 1
+    user system
+    group ccci system
     class core
     oneshot
 
@@ -473,6 +507,7 @@ service pppd_gprs /system/bin/pppd_dt /dev/ttyACM0 debug noauth refuse-eap usepe
     disabled
     oneshot
 
+#Add by T.Zh for ppp daemon
 service pppd /system/bin/pppd file /data/misc/ppp/ppp_options
     user root
     disabled 
@@ -483,6 +518,11 @@ service terservice /system/bin/terservice
     user radio
     group radio cache inet misc ccci
     oneshot
+
+#
+#
+#  Modem related services (End)
+#
 
 #
 #
@@ -510,8 +550,125 @@ service emcsmdlogger /system/bin/emcsmdlogger
     oneshot
 
 #
+#sensor service (begin)
+#
+
+service msensord /system/bin/msensord
+    class main
+    oneshot
+
+service s62xd /system/bin/s62xd
+    disabled
+    user compass
+    group system
+    class main
+
+service ami304d /system/bin/ami304d
+    user system
+    group system
+    disabled
+    class main
+
+service memsicd /system/bin/memsicd
+     disabled
+    user system
+    group system
+    class main
+
+service memsicd3416x /system/bin/memsicd3416x
+     disabled
+	 user system
+    group system
+    class main
+
+service akmd8975 /system/bin/akmd8975
+    disabled
+    user system
+    group system
+    class main
+
+service akmd8963 /system/bin/akmd8963
+    disabled
+    user system
+    group system
+    class main
+
+service akmd09911 /system/bin/akmd09911
+    disabled
+    user system
+    group system
+    class main
+
+service bmm050d /system/bin/bmm050d
+    disabled
+    user system
+    group system
+    class main
+
+service bmm056d /system/bin/bmm056d
+    disabled
+    user system
+    group system
+    class main
+
+service mc6420d /system/bin/mc6420d
+    disabled
+    user system
+    group system
+    class main
+    
+service qmc5983d /system/bin/qmc5983d
+     disabled
+	 user system
+    group system
+    class main
+
+service orientationd /system/bin/orientationd
+    disabled
+    user system
+    group system input
+    class main
+
+service AcdApiDaemon /system/bin/AcdApiDaemon
+    disabled
+    user system
+    group system
+    class main
+
+service geomagneticd /system/bin/geomagneticd
+    disabled
+    user system
+    group system input
+    class main
+    
+service mc64xxd /system/bin/mc64xxd
+    disabled
+    user system
+    group system
+    class main
+    
+        
+#
+#sensor service (end)
 #
 #
+#
+#
+
+service agpsd /system/bin/mtk_agpsd
+    class main
+    socket agpsd stream 660 gps system
+    socket agpsd2 stream 660 gps system
+    socket agpsd3 stream 660 gps system
+    user gps
+    group gps ccci inet sdcard_r sdcard_rw misc
+
+service mnld /system/xbin/mnld
+    user gps
+    group nvram gps inet misc sdcard_rw sdcard_r media_rw
+    socket mnld stream 660 gps system
+    disabled
+
 
 # virtual sdcard daemon running as media_rw (1023)
 service fuse_sdcard0 /system/bin/sdcard -u 1023 -g 1023 /mnt/media_rw/sdcard0 /storage/sdcard0

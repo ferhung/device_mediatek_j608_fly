@@ -159,5 +159,3 @@
 /dev/touch              0660   root       system
 /dev/hotknot             0660    root system
 
-# wangyk add for fingerprint
-/dev/esfp0                0666    root   root

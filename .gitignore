@@ -1,9 +1,0 @@
-*.~
-*.old
-*.bak
-*.orig
-
-.gitignore
-!.gitignore
-
-txt
