@@ -46,7 +46,6 @@ PRODUCT_COPY_FILES += \
     device/fly/j608_fly/rootdir/init.mt6592.rc:root/init.mt6592.rc \
     device/fly/j608_fly/rootdir/init.recovery.mt6592.rc:root/init.recovery.mt6592.rc \
     device/fly/j608_fly/rootdir/init.mt6592.usb.rc:root/init.mt6592.usb.rc \
-    device/fly/j608_fly/rootdir/twrp.fstab:recovery/root/etc/twrp.fstab \
     device/fly/j608_fly/rootdir/ueventd.mt6592.rc:root/ueventd.mt6592.rc \
     $(LOCAL_KERNEL):kernel
 
@@ -61,7 +60,9 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.autofocus.xml:system/etc/permissions/android.hardware.camera.autofocus.xml \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
     frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
-    frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml
+    frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml \
+    frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
+    frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml
 
 PRODUCT_COPY_FILES += \
     device/fly/j608_fly/configs/media_codecs.xml:system/etc/media_codecs.xml \
@@ -71,6 +72,13 @@ PRODUCT_PACKAGES += \
     Torch
 
 $(call inherit-product, build/target/product/full.mk)
+
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
+	ro.secure=0 \
+	ro.allow.mock.location=1 \
+	ro.debuggable=1 \
+	ro.zygote=zygote32 \
+	persist.sys.usb.config=adb
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 PRODUCT_NAME := full_j608_fly

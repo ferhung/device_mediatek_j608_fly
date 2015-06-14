@@ -28,12 +28,16 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 4613734400
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 TARGET_PREBUILT_KERNEL := device/fly/j608_fly/kernel
-BOARD_CUSTOM_BOOTIMG_MK := device/fly/j608_fly/bootimg.mk
 
+BOARD_CUSTOM_BOOTIMG_MK := device/fly/j608_fly/bootimg.mk
+BOARD_MKBOOTIMG_ARGS := --board 1419997733
 TARGET_KMODULES := true
 
 COMMON_GLOBAL_CFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
+
+# Disable memcpy opt (for audio libraries)
+TARGET_CPU_MEMCPY_OPT_DISABLE := true
 
 # EGL
 BOARD_EGL_CFG := device/fly/j608_fly/configs/egl.cfg
@@ -45,6 +49,7 @@ BOARD_HAS_MTK_HARDWARE := true
 MTK_HARDWARE := true
 COMMON_GLOBAL_CFLAGS += -DMTK_HARDWARE
 COMMON_GLOBAL_CPPFLAGS += -DMTK_HARDWARE
+BLOCK_BASED_OTA := false
 
 # RIL
 BOARD_RIL_CLASS := ../../../device/fly/j608_fly/ril/
@@ -69,26 +74,22 @@ BOARD_HAVE_BLUETOOTH_MTK := true
 BOARD_BLUETOOTH_DOES_NOT_USE_RFKILL := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/fly/j608_fly/bluetooth
 
-# CWM
-TARGET_RECOVERY_FSTAB := device/fly/j608_fly/rootdir/recovery.fstab
-BOARD_HAS_NO_SELECT_BUTTON := true
+# recovery TWRP
 
-# TWRP
-#RECOVERY_VARIANT=twrp
 DEVICE_RESOLUTION := 720x1280
-BOARD_HAS_LARGE_FILESYSTEM := true
-TW_NO_USB_STORAGE := true
+TARGET_RECOVERY_FSTAB := device/fly/j608_fly/rootdir/twrp.fstab
+TARGET_PREBUILT_RECOVERY_KERNEL := device/fly/j608_fly/kernel
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/mt_usb/musb-hdrc.0/gadget/lun%d/file
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
-TW_NO_REBOOT_BOOTLOADER := true
-TW_BRIGHTNESS_PATH := /sys/devices/platform/leds-mt65xx/leds/lcd-backlight/brightness
+TW_INCLUDE_JB_CRYPTO := true
+TW_CRYPTO_FS_TYPE := "ext4"
+TW_CRYPTO_REAL_BLKDEV := "/dev/block/mmcblk0p7"
+TW_CRYPTO_MNT_POINT := "/data"
+TW_CRYPTO_FS_OPTIONS := "nosuid,nodev,noatime,discard,noauto_da_alloc,data=ordered"
+TW_DEFAULT_EXTERNAL_STORAGE := true
+TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 TW_MAX_BRIGHTNESS := 255
-#TW_CUSTOM_BATTERY_PATH := /sys/devices/platform/mt6320-battery/power_supply/battery
-TW_INTERNAL_STORAGE_PATH := "/emmc"
-TW_INTERNAL_STORAGE_MOUNT_POINT := "emmc"
-TW_EXTERNAL_STORAGE_PATH := "/sdcard"
-TW_EXTERNAL_STORAGE_MOUNT_POINT := "sdcard"
-
-TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/virtual/android_usb/android0/f_mass_storage/lun%d/file"
+TW_CUSTOM_CPU_TEMP_PATH := /sys/devices/virtual/thermal/thermal_zone1/temp
 
 BOARD_SEPOLICY_DIRS := \
        device/fly/j608_fly/sepolicy
