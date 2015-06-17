@@ -77,10 +77,11 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/fly/j608_fly/bluetooth
 # recovery TWRP
 
 DEVICE_RESOLUTION := 720x1280
-TARGET_RECOVERY_FSTAB := device/fly/j608_fly/rootdir/twrp.fstab
+TARGET_RECOVERY_FSTAB := device/fly/j608_fly/rootdir/recovery.fstab
 TARGET_PREBUILT_RECOVERY_KERNEL := device/fly/j608_fly/kernel
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/mt_usb/musb-hdrc.0/gadget/lun%d/file
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
+TW_NO_REBOOT_BOOTLOADER := true
 TW_INCLUDE_JB_CRYPTO := true
 TW_CRYPTO_FS_TYPE := "ext4"
 TW_CRYPTO_REAL_BLKDEV := "/dev/block/mmcblk0p7"
